@@ -1,0 +1,27 @@
+{
+    "nodes": [
+        {
+            "id": "words",
+            "name": "graphpy.tasks.injestion.word_generator_task.WordGeneratorTask",
+            "max_words": 3
+        },
+        {
+            "id": "print",
+            "name": "graphpy.tasks.output.print_task.PrintTask"
+        },
+        {
+            "id": "count",
+            "name": "graphpy.tasks.aggregation.count_task.CountTask"
+        }
+    ],
+    "links": [
+        {
+            "from": "words",
+            "to": "count"
+        },
+        {
+            "from": "count",
+            "to": "print"
+        }
+    ]
+}
