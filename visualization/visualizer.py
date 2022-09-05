@@ -15,12 +15,16 @@ def create_node(session: Session, node_config: dict[str, Any]) -> None:
     session.run(create_node, **node_config)
 
 
-def create_link(session: Session, link_config: dict[str, Any]) -> None:
+def create_link(session: Session, nodes: list[dict[str, Any]], link_config: dict[str, Any]) -> None:
+    node_config = [node_config for node_config in nodes if node_config["id"] == link_config["from"]][0]
+    from_node_class = get_class_for_name(node_config["name"])
+    link_type=from_node_class.get_output_type().__name__
     create_link = """MATCH
         (f),
         (t)
         WHERE (f:Task OR f:Aggregation) AND (t:Task OR t:Aggregation) and f.id = $from AND t.id = $to
-        MERGE (f)-[r:SendsTo]->(t)"""
+        MERGE (f)-[r:SendsTo {type: $type}]->(t)"""
+    link_config["type"] = link_type
     session.run(create_link, **link_config)
 
 
@@ -30,7 +34,7 @@ def visualize(config: dict[str, Any], uri: str, username: str, password: str) ->
         for node_config in config["nodes"]:
             create_node(session, node_config)
         for link_config in config["links"]:
-            create_link(session, link_config)
+            create_link(session, config["nodes"], link_config)
     driver.close()
 
 
