@@ -19,9 +19,6 @@ class WordGeneratorTask(Task):
         if self.words_left == 0:
             return FinishedSignal()
         self.words_left -= 1
-        import time
-
-        time.sleep(0.1)
         return random.choice(self.words)
 
     @staticmethod

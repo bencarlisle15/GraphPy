@@ -12,6 +12,11 @@
         {
             "id": "count",
             "name": "graphpy.tasks.aggregation.count_task.CountTask"
+        },
+        {
+            "id": "packets",
+            "name": "graphpy.tasks.injestion.pcap_task.PcapTask",
+            "pcap_file": "./pcap.pcap"
         }
     ],
     "links": [
@@ -21,6 +26,10 @@
         },
         {
             "from": "count",
+            "to": "print"
+        },
+        {
+            "from": "packets",
             "to": "print"
         }
     ]
