@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from graphpy.tasks.task import Task
+from graphpy.tasks.abstract.task import Task
 from graphpy.pool.pool import Pool
 
 from typing import (

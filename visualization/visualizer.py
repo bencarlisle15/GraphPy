@@ -3,7 +3,7 @@ import json
 
 from typing import Any
 
-from neo4j import GraphDatabase, Session
+from neo4j import GraphDatabase, Session  # type: ignore
 
 from graphpy.config_injest import get_class_for_name
 from graphpy.tasks.abstract.aggregation import Aggregation
@@ -11,14 +11,21 @@ from graphpy.tasks.abstract.aggregation import Aggregation
 
 def create_node(session: Session, node_config: dict[str, Any]) -> None:
     node_class = get_class_for_name(node_config["name"])
-    create_node = "MERGE (n:%s {id: $id, name: $name})" % ("Aggregation" if issubclass(node_class, Aggregation) else "Task")
+    create_node = "MERGE (n:%s {id: $id, name: $name})" % (
+        "Aggregation" if issubclass(node_class, Aggregation) else "Task"
+    )
     session.run(create_node, **node_config)
 
 
-def create_link(session: Session, nodes: list[dict[str, Any]], link_config: dict[str, Any]) -> None:
-    node_config = [node_config for node_config in nodes if node_config["id"] == link_config["from"]][0]
+def create_link(
+    session: Session, nodes: list[dict[str, Any]], link_config: dict[str, Any]
+) -> None:
+    node_config = [
+        node_config for node_config in nodes if node_config["id"] == link_config["from"]
+    ][0]
     from_node_class = get_class_for_name(node_config["name"])
-    link_type=from_node_class.get_output_type().__name__
+    link_type_class = from_node_class.get_output_type()
+    link_type = link_type_class.__name__ if link_type_class is not None else "None"
     create_link = """MATCH
         (f),
         (t)
@@ -45,7 +52,7 @@ if __name__ == "__main__":
         "--config",
         type=str,
         help="Config to visualize",
-        default="../examples/configs/default.json",
+        default="../graphpy_examples/configs/default.json",
     )
     parser.add_argument(
         "--uri", type=str, help="Neo4j URI", default="bolt://localhost:7687"

@@ -2,20 +2,20 @@
     "nodes": [
         {
             "id": "words",
-            "name": "graphpy.tasks.injestion.word_generator_task.WordGeneratorTask",
+            "name": "graphpy_examples.tasks.injestion.word_generator_task.WordGeneratorTask",
             "max_words": 3
         },
         {
             "id": "print",
-            "name": "graphpy.tasks.output.print_task.PrintTask"
+            "name": "graphpy_examples.tasks.output.print_task.PrintTask"
         },
         {
             "id": "count",
-            "name": "graphpy.tasks.aggregation.count_task.CountTask"
+            "name": "graphpy_examples.tasks.aggregation.count_task.CountTask"
         },
         {
             "id": "packets",
-            "name": "graphpy.tasks.injestion.pcap_task.PcapTask",
+            "name": "graphpy_examples.tasks.injestion.pcap_task.PcapTask",
             "pcap_file": "./pcap.pcap"
         }
     ],
