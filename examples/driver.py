@@ -1,13 +1,7 @@
-from typing import Any
-
-import json
-from graphpy import config_injest, executor
 import argparse
+import json
 
-
-def graphpy_main(config: Any) -> None:
-    initiator, initiator_nodes, nodes = config_injest.config_injest(config)
-    executor.execute(initiator, initiator_nodes, nodes)
+from graphpy.graphpy import GraphPy
 
 
 if __name__ == "__main__":
@@ -21,4 +15,4 @@ if __name__ == "__main__":
 
     with open(args.config, "r") as f:
         config = json.load(f)
-    graphpy_main(config)
+    GraphPy(config).start()

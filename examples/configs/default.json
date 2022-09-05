@@ -15,7 +15,7 @@
         },
         {
             "id": "packets",
-            "name": "graphpy.tasks.injestion.pcap_task.PcapTask",
+            "name": "tasks.injestion.pcap_task.PcapTask",
             "pcap_file": "./pcap.pcap"
         }
     ],

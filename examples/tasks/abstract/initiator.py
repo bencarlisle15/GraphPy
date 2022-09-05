@@ -1,4 +1,4 @@
-from graphpy.tasks.task import Task
+from graphpy.tasks.abstract.task import Task
 from graphpy.finished_signal import FinishedSignal
 
 from typing import Any, Optional, Type

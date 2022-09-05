@@ -2,3 +2,5 @@
 *.pcap
 *.pyc
 __pycache__
+build
+GraphPy.egg-info/
