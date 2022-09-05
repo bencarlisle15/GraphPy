@@ -17,8 +17,8 @@ class CountTask(Aggregation):
             pool.add_task(self.num_results, child, self)
 
     @staticmethod
-    def get_input_type() -> Optional[Type[Any]]:
-        return str
+    def get_input_types() -> list[Type[Any]]:
+        return [str]
 
     @staticmethod
     def get_output_type() -> Optional[Type[Any]]:

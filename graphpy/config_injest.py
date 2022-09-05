@@ -27,10 +27,15 @@ def create_node(node_config: dict[str, Any]) -> tuple[str, Task]:
 
 def is_compatible(from_node: Task, to_node: Task) -> bool:
     from_node_output = type(from_node).get_output_type()
-    to_node_input = type(to_node).get_input_type()
-    if from_node_output is None or to_node_input is None:
+    to_node_inputs = type(to_node).get_input_types()
+    if from_node_output is None or len(to_node_inputs) == 0:
         return False
-    return issubclass(from_node_output, to_node_input)
+    return any(
+        [
+            issubclass(from_node_output, to_node_input)
+            for to_node_input in to_node_inputs
+        ]
+    )
 
 
 def create_nodes(
@@ -50,7 +55,7 @@ def create_nodes(
             raise Exception("Cannot create an initiator")
         elif not isinstance(task, Task):
             raise Exception("Task must be a task")
-        elif type(task).get_input_type() is None:
+        elif len(type(task).get_input_types()) == 0:
             initiator_nodes.append(task_id)
         nodes[task_id] = task
     return nodes, initiator_nodes

@@ -11,8 +11,8 @@ class PrintTask(Task):
         return None
 
     @staticmethod
-    def get_input_type() -> Optional[Type[Any]]:
-        return object
+    def get_input_types() -> list[Type[Any]]:
+        return [object]
 
     @staticmethod
     def get_output_type() -> Optional[Type[Any]]:

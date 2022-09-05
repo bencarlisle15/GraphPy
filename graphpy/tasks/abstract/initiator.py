@@ -24,8 +24,8 @@ class Initiator(Task):
         return self.num_ended
 
     @staticmethod
-    def get_input_type() -> Optional[Type[Any]]:
-        return None
+    def get_input_types() -> list[Type[Any]]:
+        return []
 
     @staticmethod
     def get_output_type() -> Optional[Type[Any]]:

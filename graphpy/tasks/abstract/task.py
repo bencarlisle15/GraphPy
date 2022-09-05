@@ -37,7 +37,7 @@ class Task(ABC):
 
     @staticmethod
     @abstractmethod
-    def get_input_type() -> Optional[Type[Any]]:
+    def get_input_types() -> list[Type[Any]]:
         pass
 
     @staticmethod
